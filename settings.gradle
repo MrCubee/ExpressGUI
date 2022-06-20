@@ -1,7 +1,12 @@
 rootProject.name = 'ExpressGui'
 
-['core'].each {
-    include ":express-gui-${it}"
-    project(":express-gui-${it}").projectDir = file(it)
+['core', 'template'].each {
+    if (it.equalsIgnoreCase('core')) {
+        include ":express-gui"
+        project(":express-gui").projectDir = file(it)
+    } else {
+        include ":express-gui-${it}"
+        project(":express-gui-${it}").projectDir = file(it)
+    }
 }
 

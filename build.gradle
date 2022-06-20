@@ -5,6 +5,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
     repositories {
         maven {
@@ -20,6 +21,35 @@ subprojects {
     compileJava.options.encoding = 'UTF-8'
 
     dependencies {
-        implementation 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+        compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    }
+
+    publishing {
+        repositories {
+            maven {
+                url = 'https://nexus.mrcubee.net/repository/minecraft'
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
+        publications {
+            shadow(MavenPublication) {
+                from components.java
+                pom {
+                    name = project.name
+                    description = project.description
+                    url = 'https://github.com/MrCubee/ExpressGUI'
+                    developers {
+                        developer {
+                            id = 'mrcubee'
+                            name = 'MrCubee'
+                            email = 'contact@mrcubee.net'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
