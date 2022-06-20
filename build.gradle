@@ -1,0 +1,25 @@
+allprojects {
+    group 'fr.mrcubee.minecraft.library'
+    version '1.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        maven {
+            url 'https://nexus.mrcubee.net/repository/minecraft/'
+        }
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += ["-source", "1.8", "-target", "1.8"]
+    }
+
+    compileJava.options.encoding = 'UTF-8'
+
+    dependencies {
+        implementation 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    }
+}
