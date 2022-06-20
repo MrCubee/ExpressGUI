@@ -3,6 +3,7 @@ package fr.mrcubee.menu;
 import fr.mrcubee.menu.object.ObjectChestMenu;
 import fr.mrcubee.menu.object.ObjectHopperMenu;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
@@ -11,7 +12,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Menus {
+public class Menus implements Listener {
 
     protected final Set<Menu> menus;
 
