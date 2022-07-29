@@ -20,13 +20,20 @@ public class Menus implements Listener {
         this.menus = new HashSet<Menu>();
     }
 
-    protected  <T> T createMenuInstance(final Class<T> menuClass, final Object... parameters) {
+    protected <T> T createMenuInstance(final Class<T> menuClass, final Object... parameters) {
+        final Object[] completeParameters;
         final Constructor<T> constructor;
         T menu = null;
 
         if (menuClass == null)
             return null;
-        constructor = Reflections.getConstructor(menuClass, this, parameters);
+        if (parameters != null) {
+            completeParameters = new Object[parameters.length + 1];
+            System.arraycopy(parameters, 0, completeParameters, 1, parameters.length);
+        } else
+            completeParameters = new Object[1];
+        completeParameters[0] = this;
+        constructor = Reflections.getConstructor(menuClass, this, completeParameters);
         if (constructor == null)
             return null;
         try {

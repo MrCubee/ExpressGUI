@@ -22,7 +22,7 @@ public class Reflections {
             return getConstructor(clazz);
         parameterClasses = new Class<?>[parameters.length];
         for (int i = 0; i < parameters.length; i++)
-            parameterClasses[i] = parameters.getClass();
+            parameterClasses[i] = parameters[i].getClass();
         return getConstructor(clazz, parameterClasses);
     }
 
